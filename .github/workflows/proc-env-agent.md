@@ -3,7 +3,7 @@
   workflow_run:
     workflows: ["GHAW proc env PR upstream"]
     types: [completed]
-    branches: [main]
+    branches: [proc-env-control-20260918]
   roles: all
 
 permissions:
