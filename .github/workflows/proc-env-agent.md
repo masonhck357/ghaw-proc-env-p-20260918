@@ -14,10 +14,15 @@ permissions:
 
 if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.actor.login == 'masonghbb'
 
-checkout:
-  - repository: ${{ github.event.workflow_run.head_repository.full_name }}
-    ref: ${{ github.event.workflow_run.head_sha }}
-    path: untrusted
+steps:
+  - name: Checkout approved fork head into untrusted
+    uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+    with:
+      repository: ${{ github.event.workflow_run.head_repository.full_name }}
+      ref: ${{ github.event.workflow_run.head_sha }}
+      path: untrusted
+      persist-credentials: false
+      allow-unsafe-pr-checkout: true
 
 engine:
   id: copilot
