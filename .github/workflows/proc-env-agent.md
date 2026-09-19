@@ -15,6 +15,12 @@ permissions:
 if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.actor.login == 'masonghbb'
 
 steps:
+  - name: Checkout workflow repository
+    uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+    with:
+      repository: ${{ github.repository }}
+      ref: ${{ github.sha }}
+      persist-credentials: false
   - name: Checkout approved fork head into untrusted
     uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
     with:
